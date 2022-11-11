@@ -1,0 +1,25 @@
+.navlist {
+    background-color: #56049b;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    text-decoration: underline;
+    margin-bottom: 50px;
+}
+
+.form {
+    text-align: center;
+    padding: 25px;
+    width: 1000px;
+    background-color: rgb(228, 228, 228);
+    border-radius: 3%;
+    box-shadow: 3px 3px 3px rgb(75, 75, 75);
+    margin-bottom: 50px;
+}
+.title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30pt;
+    text-align: center;
+    color: #56049b;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

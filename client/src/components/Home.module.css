@@ -1,0 +1,20 @@
+.navlist {
+    background-color: #56049b;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    text-decoration: underline;
+}
+
+.image {
+    position: absolute;
+    text-align: left;
+    margin: -7em 0 0 8%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 30pt;
+}
+
+.header {
+    text-align: center;
+    color: #56049b;
+    margin-top: 20px;;
+}
