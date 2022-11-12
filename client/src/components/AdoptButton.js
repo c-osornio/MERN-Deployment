@@ -11,7 +11,7 @@ const AdoptButton = (props) => {
 
     const navigate = useNavigate();
 
-    const [socket] = useState( () => io('/') );
+    const [socket] = useState( () => io('/api') );
 
     const adoptPet = e => {
         axios.delete('http://localhost:8000/api/pets/' + petId)
