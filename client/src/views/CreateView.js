@@ -19,7 +19,7 @@ const CreateView = () => {
     const [image, setImage] = useState('');
     const [like, setLike] = useState(false);
 
-    const [socket] = useState( () => io(':8000') );
+    const [socket] = useState( () => io('/') );
 
     const navigate = useNavigate()
 
