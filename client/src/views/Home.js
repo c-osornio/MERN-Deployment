@@ -13,7 +13,7 @@ import Container from 'react-bootstrap/Container';
 const Home = () => {
     const [pets, setPets] = useState([]);
     const navigate = useNavigate()
-    const [socket] = useState( () => io(':8000') );
+    const [socket] = useState( () => io('/') );
 
     const removeFromDom = petId => {
         setPets(pets.filter(pet => pet._id !== petId)); 
