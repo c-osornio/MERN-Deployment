@@ -54,9 +54,9 @@ const Home = () => {
             <div className={styles.navlist}>
                 <h2 className="btn text-white fs-5" onClick={()=> navigate('/pets/new')}><AddIcon color="primary"/>Add pet for adoption</h2>
             </div>
-            <img width="100%" height="300" src="https://jointanimalservices.org/wp-content/uploads/2015/07/adoptapet.jpg" alt="Pets waiting for adoption" />
+            <img width="100%" height="300" src="https://mattiesplace.ca/assets/img/mattie/adoption-banner.jpg" alt="Pets waiting for adoption" />
             <div className={styles.image}> 
-                <h1>Adopt a Pet Today!</h1>
+                <h1 >Adopt a Pet Today!</h1>
             </div>
             <h2 className={styles.header}>Pets availabe for adoption near you</h2>
             <Container className="mt-5 d-flex justify-content-center gap-4 flex-wrap">
