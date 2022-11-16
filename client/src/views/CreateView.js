@@ -4,7 +4,7 @@ import PetForm from '../components/PetForm';
 import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import styles from '../components/PetForm.module.css';
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home';
 
@@ -19,7 +19,7 @@ const CreateView = () => {
     const [image, setImage] = useState('');
     const [like, setLike] = useState(false);
 
-    // const [socket] = useState( () => io('http://54.215.26.227') );
+    const [socket] = useState( () => io('http://54.215.26.227') );
 
     const navigate = useNavigate()
 
@@ -34,7 +34,7 @@ const CreateView = () => {
                 setSkills([])
                 setImage("")
                 setLike(false)
-                // socket.emit('new_pet', [...pets, res.data] )
+                socket.emit('new_pet', [...pets, res.data] )
                 navigate("/pets");
             })
             .catch((err)=> {
@@ -54,20 +54,20 @@ const CreateView = () => {
             })
     }, [])
 
-    // useEffect( () => {
-    //     console.log('Socket is running');
-    //     socket.on('receive_pets', (pets) => {
-    //         console.log("Received Pets", pets)
-    //         setPets(pets)
-    //         return () => socket.disconnect(true);
-    //     });
-    //     socket.on('receive_removal', (data) => {
-    //         console.log("Received Pet Id for Removal:", data)
-    //         setPets(pets.filter( pet => pet._id !== data))
-    //         return () => socket.disconnect(true);
-    //     });
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [socket, pets] );
+    useEffect( () => {
+        console.log('Socket is running');
+        socket.on('receive_pets', (pets) => {
+            console.log("Received Pets", pets)
+            setPets(pets)
+            return () => socket.disconnect(true);
+        });
+        socket.on('receive_removal', (data) => {
+            console.log("Received Pet Id for Removal:", data)
+            setPets(pets.filter( pet => pet._id !== data))
+            return () => socket.disconnect(true);
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [socket, pets] );
 
     return (
         <>

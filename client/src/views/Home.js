@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Nav from '../components/Nav';
 import List from '../components/List';
 import axios from "axios";
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add';
 import styles from "../components/Home.module.css"
@@ -13,7 +13,7 @@ import Container from 'react-bootstrap/Container';
 const Home = () => {
     const [pets, setPets] = useState([]);
     const navigate = useNavigate()
-    // const [socket] = useState( () => io('http://54.215.26.227') );
+    const [socket] = useState( () => io('http://54.215.26.227') );
 
     const removeFromDom = petId => {
         setPets(pets.filter(pet => pet._id !== petId)); 
@@ -30,21 +30,21 @@ const Home = () => {
             })
     }, [])
 
-    // useEffect( () => {
-    //     console.log('Socket is running');
-    //     socket.connect()
-    //     socket.on('receive_pets', (pets) => {
-    //         console.log("Received Pets", pets)
-    //         setPets(pets)
-    //         return () => socket.disconnect(true);
-    //     });
-    //     socket.on('receive_removal', (data) => {
-    //         console.log("Received Pet Id for Removal:", data)
-    //         setPets(pets.filter( pet => pet._id !== data))
-    //         return () => socket.disconnect(true);
-    //     });
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [socket, pets] );
+    useEffect( () => {
+        console.log('Socket is running');
+        socket.connect()
+        socket.on('receive_pets', (pets) => {
+            console.log("Received Pets", pets)
+            setPets(pets)
+            return () => socket.disconnect(true);
+        });
+        socket.on('receive_removal', (data) => {
+            console.log("Received Pet Id for Removal:", data)
+            setPets(pets.filter( pet => pet._id !== data))
+            return () => socket.disconnect(true);
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [socket, pets] );
 
 
 
