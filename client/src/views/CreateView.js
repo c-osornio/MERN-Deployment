@@ -19,7 +19,14 @@ const CreateView = () => {
     const [image, setImage] = useState('');
     const [like, setLike] = useState(false);
 
-    const [socket] = useState( () => io('http://54.215.26.227/api') );
+    // let socket;
+    // if (process.env.NODE_ENV === 'development') {
+    //     socket = socketIOClient('http://127.0.0.1:8000');
+    // }else {
+    //     socket = useState(() => io('http://54.215.26.227/api'))
+    // }
+    
+    const [socket] = useState(() => io('http://54.215.26.227/api'));
 
     const navigate = useNavigate()
 
@@ -34,10 +41,10 @@ const CreateView = () => {
                 setSkills([])
                 setImage("")
                 setLike(false)
-                socket.emit('new_pet', [...pets, res.data] )
+                socket.emit('new_pet', [...pets, res.data])
                 navigate("/pets");
             })
-            .catch((err)=> {
+            .catch((err) => {
                 console.log(err);
                 setErrors(err.response.data.error.errors)
             })
@@ -49,12 +56,12 @@ const CreateView = () => {
                 console.log(res.data);
                 setPets(res.data)
             })
-            .catch((err)=> {
+            .catch((err) => {
                 console.log(err);
             })
     }, [])
 
-    useEffect( () => {
+    useEffect(() => {
         console.log('Socket is running');
         socket.on('receive_pets', (pets) => {
             console.log("Received Pets", pets)
@@ -63,23 +70,23 @@ const CreateView = () => {
         });
         socket.on('receive_removal', (data) => {
             console.log("Received Pet Id for Removal:", data)
-            setPets(pets.filter( pet => pet._id !== data))
+            setPets(pets.filter(pet => pet._id !== data))
             return () => socket.disconnect(true);
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [socket, pets] );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [socket, pets]);
 
     return (
         <>
-            <Nav/>
+            <Nav />
             <div className={styles.navlist}>
-                <h2 className="btn text-white fs-5" onClick={()=> navigate('/pets')}><HomeIcon color="primary"/>Homepage</h2>
+                <h2 className="btn text-white fs-5" onClick={() => navigate('/pets')}><HomeIcon color="primary" />Homepage</h2>
             </div>
-            <Container className= {styles.form}>
+            <Container className={styles.form}>
                 <h2 className={styles.title}>Know a pet needing a home?</h2>
-                <PetForm like={like} pets={pets} setProducts={setPets} name={name} type={type} description={description} 
-                setName={setName} setType={setType} setDescription={setDescription} skills={skills} setSkills={setSkills} 
-                image={image} setImage={setImage} onSubmitProp={createPet} errors={errors}/>
+                <PetForm like={like} pets={pets} setProducts={setPets} name={name} type={type} description={description}
+                    setName={setName} setType={setType} setDescription={setDescription} skills={skills} setSkills={setSkills}
+                    image={image} setImage={setImage} onSubmitProp={createPet} errors={errors} />
             </Container>
         </>
     )
