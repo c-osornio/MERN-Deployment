@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdoptButton = (props) => {
     
-    // const { petId, successCallback } = props;
-    const { petId } = props;
+    const { petId, successCallback } = props;
 
     const navigate = useNavigate();
 
@@ -23,7 +22,7 @@ const AdoptButton = (props) => {
             .then(res=>{
                 console.log(res)
                 socket.emit('remove_pet', petId )
-                // successCallback();
+                successCallback();
                 navigate('/pets')
             })
     }

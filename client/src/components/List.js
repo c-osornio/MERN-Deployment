@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-// import AdoptButton from './AdoptButton';
+import AdoptButton from './AdoptButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
@@ -14,8 +14,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 const List = (props) => {
-    // const {pets, setPets, removeFromDom} = props;
-    const {pets, setPets} = props;
+    const {pets, setPets, removeFromDom} = props;
+
     const navigate = useNavigate()
     
     const sortedPets= [...pets].sort( (a, b) => (a.type > b.type) ? 1 : -1 );
@@ -38,7 +38,7 @@ const List = (props) => {
         <>
             {
                 sortedPets.map((item, idx) => (
-                    <Card sx={{ maxWidth: 200}} key={idx}>
+                    <Card sx={{ maxWidth: 225}} key={idx}>
                         <CardActionArea>
                             <CardMedia 
                             component="img"
@@ -65,7 +65,7 @@ const List = (props) => {
                             </CardContent>
                         </CardActionArea>
                         <CardActions className="d-flex justify-content-center">
-                            {/* <AdoptButton successCallBack={()=>removeFromDom(item._id)} petId={item._id}/> */}
+                            <AdoptButton successCallBack={()=>removeFromDom(item._id)} petId={item._id}/>
                             <Button size="small" color="primary" variant="contained" onClick={() => navigate(`/pets/${item._id}`)} >
                                 Details
                             </Button>
