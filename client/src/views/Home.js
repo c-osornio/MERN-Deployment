@@ -13,12 +13,14 @@ import Container from 'react-bootstrap/Container';
 const Home = () => {
     const [pets, setPets] = useState([]);
     const navigate = useNavigate()
-    const [socket] = useState( () => io('http://54.215.26.227/api/' , {
-        withCredentials:true,
-        extraHeaders:{
-            "my-custom-header": "abcd"
-        }
-    }) );
+    
+    const [socket] = useState( () => io('http://54.215.26.227/api' ))
+    // , {
+    //     withCredentials:true,
+    //     extraHeaders:{
+    //         "my-custom-header": "abcd"
+    //     }
+    // }) );
 
     const removeFromDom = petId => {
         setPets(pets.filter(pet => pet._id !== petId)); 
@@ -66,7 +68,6 @@ const Home = () => {
             <Container className="mt-5 d-flex justify-content-center gap-4 flex-wrap">
                 <List pets={pets} setPets={setPets} removeFromDom={removeFromDom} />
             </Container>
-
         </>
     )
 }

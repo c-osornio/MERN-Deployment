@@ -6,7 +6,7 @@ const socket = require('socket.io');
 
 app.use(cors({
     origin: "http://localhost:3000",
-    credentials: true
+    // credentials: true
 }))  
 
 app.use(express.json(), express.urlencoded({ extended: true }));
@@ -35,13 +35,11 @@ io.on("connection", socket => {
         console.log(`connect_error due to ${err.message}`);
     });
     // Socket for when a new pet is created
-    socket.on("new_pet", (data, err) => {
-        console.log(`connect_error due to ${err.message}`);
+    socket.on("new_pet", (data) => {
         socket.broadcast.emit("receive_pets", data)
     });
     // Socket for when a pet is adopted 
-    socket.on("remove_pet", (data, err) => {
-        console.log(`connect_error due to ${err.message}`);
+    socket.on("remove_pet", (data) => {
         socket.broadcast.emit("receive_removal", data)
     });
 });
