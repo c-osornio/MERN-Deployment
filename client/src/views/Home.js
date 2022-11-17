@@ -13,7 +13,12 @@ import Container from 'react-bootstrap/Container';
 const Home = () => {
     const [pets, setPets] = useState([]);
     const navigate = useNavigate()
-    const [socket] = useState( () => io('http://54.215.26.227/api') );
+    const [socket] = useState( () => io('http://54.215.26.227/api', {
+        withCredentials:true,
+        extraHeaders:{
+            "my-custom-header": "abcd"
+        }
+    }) );
 
     const removeFromDom = petId => {
         setPets(pets.filter(pet => pet._id !== petId)); 
@@ -43,7 +48,6 @@ const Home = () => {
             setPets(pets.filter( pet => pet._id !== data))
             return () => socket.disconnect(true);
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [socket, pets] );
 
 

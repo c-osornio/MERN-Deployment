@@ -1,5 +1,6 @@
 const express = require('express');
 // const path = require('path');
+require('dotenv').config()
 const app = express();
 const cors = require('cors') 
 const port = 8000;
@@ -8,10 +9,10 @@ const port = 8000;
 // app.get('/', function (req, res) {
 //     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 // });
-const http = require('http').createServer(app);
-http.listen(port, () => {
-    console.log(`Listening on: ${port}`);
-});
+// const http = require('http').createServer(app);
+// http.listen(port, () => {
+//     console.log(`Listening on: ${port}`);
+// });
 
 const socket = require('socket.io')(http);
 socket.on('connection', (socket) => {
@@ -19,7 +20,8 @@ socket.on('connection', (socket) => {
 });
 
 app.use(cors({
-    origin: "*:*",
+    origin: "http://localhost:3000",
+    credentials: true
 }))  
 
 app.use(express.json(), express.urlencoded({ extended: true }));
@@ -35,7 +37,7 @@ const server = app.listen(port, () => console.log(`Listening on port: ${port}`) 
 
 const io = socket(server, {
     cors: {
-        origin: "*:*",
+        origin: "http://localhost:3000",
         methods: ['GET', 'POST'],
         allowedHeaders: ['*'],
         credentials: true,

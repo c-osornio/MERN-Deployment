@@ -73,7 +73,6 @@ const CreateView = () => {
             setPets(pets.filter(pet => pet._id !== data))
             return () => socket.disconnect(true);
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [socket, pets]);
 
     return (
