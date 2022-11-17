@@ -46,6 +46,9 @@ const io = socket(server, {
 
 io.on("connection", socket => {
     console.log('socket id: ' + socket.id);
+    socket.on("connect_error", (err) => {
+        console.log(`connect_error due to ${err.message}`);
+    });
     // Socket for when a new pet is created
     socket.on("new_pet", (data, err) => {
         console.log(`connect_error due to ${err.message}`);
@@ -58,6 +61,4 @@ io.on("connection", socket => {
     });
 });
 
-socket.on("connect_error", (err) => {
-    console.log(`connect_error due to ${err.message}`);
-});
+
