@@ -13,7 +13,7 @@ import Container from 'react-bootstrap/Container';
 const Home = () => {
     const [pets, setPets] = useState([]);
     const navigate = useNavigate()
-    const [socket] = useState( () => io('http://54.215.26.227/api', {
+    const [socket] = useState( () => io('/', {
         withCredentials:true,
         extraHeaders:{
             "my-custom-header": "abcd"

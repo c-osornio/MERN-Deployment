@@ -47,11 +47,17 @@ const io = socket(server, {
 io.on("connection", socket => {
     console.log('socket id: ' + socket.id);
     // Socket for when a new pet is created
-    socket.on("new_pet", (data) => {
+    socket.on("new_pet", (data, err) => {
+        console.log(`connect_error due to ${err.message}`);
         socket.broadcast.emit("receive_pets", data)
     });
     // Socket for when a pet is adopted 
-    socket.on("remove_pet", (data) => {
+    socket.on("remove_pet", (data, err) => {
+        console.log(`connect_error due to ${err.message}`);
         socket.broadcast.emit("receive_removal", data)
     });
+});
+
+socket.on("connect_error", (err) => {
+    console.log(`connect_error due to ${err.message}`);
 });
