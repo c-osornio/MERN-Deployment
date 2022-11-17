@@ -11,7 +11,12 @@ const AdoptButton = (props) => {
 
     const navigate = useNavigate();
 
-    const [socket] = useState( () => io('/') );
+    const [socket] = useState( () => io('http://54.215.26.227/api/' , {
+        withCredentials:true,
+        extraHeaders:{
+            "my-custom-header": "abcd"
+        }
+    }) );
 
     const adoptPet = e => {
         axios.delete('http://localhost:8000/api/pets/' + petId)

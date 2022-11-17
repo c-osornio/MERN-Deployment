@@ -26,7 +26,12 @@ const CreateView = () => {
     //     socket = useState(() => io('http://54.215.26.227/api'))
     // }
     
-    const [socket] = useState(() => io('/'));
+    const [socket] = useState( () => io('http://54.215.26.227/api/' , {
+        withCredentials:true,
+        extraHeaders:{
+            "my-custom-header": "abcd"
+        }
+    }) );
 
     const navigate = useNavigate()
 
