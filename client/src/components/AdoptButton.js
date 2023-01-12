@@ -10,7 +10,7 @@ const AdoptButton = (props) => {
 
     const navigate = useNavigate();
 
-    const [socket] = useState( () => io('http://54.215.26.227/api' ))
+    const [socket] = useState( () => io(':8000' ))
     // , {
     //     withCredentials:true,
     //     extraHeaders:{
